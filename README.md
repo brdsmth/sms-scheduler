@@ -3,13 +3,13 @@
 #### Build
 
 ```
-docker build -t publisher-image -f Dockerfile .
+docker build -t scheduler-image -f Dockerfile .
 ```
 
 #### Run
 
 ```
-docker run -d -p 8080:8080 --name publisher-container publisher-image
+docker run -d -p 8080:8080 --name scheduler-container scheduler-image
 ```
 
 #### Registry
@@ -36,7 +36,7 @@ content-type: application/json
 
 {
     "to": "+18777804236",
-    "message": "SHOULD SEND",
+    "message": "This is the content of the SMS",
     "sendTime": "2023-12-12T15:15:02Z"
 }
 ```
