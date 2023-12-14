@@ -11,6 +11,7 @@ import (
 
 	"github.com/streadway/amqp"
 
+	"sms-scheduler/config"
 	"sms-scheduler/types"
 )
 
@@ -23,8 +24,12 @@ var (
 )
 
 func connectToRabbitMQ() (*amqp.Connection, error) {
-	// RabbitMQ connection URL
-	rabbitMQURL := "amqp://guest:guest@localhost:5672/"
+	// Retrieve RabbitMQ connection URL from environment variables for security
+	rabbitMQURL := config.ReadEnv("RABBITMQ_URL")
+	// rabbitMQURL := "amqp://guest:guest@localhost:5672/" // local rabbitmq url
+	if rabbitMQURL == "" {
+		log.Fatal("RABBITMQ_URL environment variable not set")
+	}
 
 	// Establish a connection to RabbitMQ
 	conn, err := amqp.Dial(rabbitMQURL)

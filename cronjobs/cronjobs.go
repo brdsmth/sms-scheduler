@@ -95,6 +95,7 @@ func consumeScheduledMessages(rabbitMQConn *amqp.Connection) {
 			// Acknowledge the message after processing
 			msg.Ack(false) // Manually acknowledge the message
 		} else {
+			// TODO: There's a bug here where we don't ack the message and then get caught in a loop
 			// If it's not time to send the message, you can decide whether to acknowledge or not
 			msg.Nack(false, true) // Manually negative acknowledge the message
 		}
